@@ -10,8 +10,13 @@
     -   Add-Migration initialCreate
     -   Update-Database
 
+#### Part 5, work with a database in an ASP.NET Core MVC app
+-   Seed the Database 
+    - 초기 데이터로 채우기
+
 ### 기타 
 - public string? Genre -> ? 는 nullable 연산자.
+- signalR
 
 ### 참조 
 - https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-7.0&tabs=visual-studio

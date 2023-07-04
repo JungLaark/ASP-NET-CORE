@@ -13,6 +13,7 @@ namespace ASP_CORE_MVC.Controllers {
         private readonly ASP_CORE_MVCContext _context;
 
         public MoviesController(ASP_CORE_MVCContext context) {
+            /*의존성 주입 Database context*/
             _context = context;
         }
 

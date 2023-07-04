@@ -8,7 +8,7 @@ namespace ASP_CORE_MVC.Migrations
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
+        /// Create Table <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -28,7 +28,7 @@ namespace ASP_CORE_MVC.Migrations
                 });
         }
 
-        /// <inheritdoc />
+        /// Drop Table <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

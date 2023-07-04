@@ -14,6 +14,7 @@ namespace ASP_CORE_MVC.Data {
             : base(options) {
         }
 
+        /*Can used to query and save instances of TEntity.*/
         public DbSet<ASP_CORE_MVC.Models.Movie> Movie { get; set; } = default!;
     }
 }

@@ -1,0 +1,10 @@
+.vs
+\bin
+bin/
+.\obj
+obj\Debug\*
+
+
+.vs/
+bin/
+obj/
