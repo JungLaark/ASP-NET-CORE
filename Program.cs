@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using ASP_CORE_MVC.Data;
 using ASP_CORE_MVC.Models;
@@ -10,6 +11,10 @@ builder.Services.AddDbContext<ASP_CORE_MVCContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//이거 왜 없노 
+   
+
 
 var app = builder.Build();
 

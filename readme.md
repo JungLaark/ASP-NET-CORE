@@ -14,9 +14,20 @@
 -   Seed the Database 
     - 초기 데이터로 채우기
 
+
+
+
+
+### Google Login
+- https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0
+- client id : 857018063372-7q5ip061l4ih17f0p5pf90ph8i4sksf7.apps.googleusercontent.com
+- password : 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
+
 ### 기타 
 - public string? Genre -> ? 는 nullable 연산자.
 - signalR
 
 ### 참조 
-- https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-7.0&tabs=visual-studio
+- https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/controller-methods-views?view=aspnetcore-7.0
+- https://www.learmoreseekmore.com/2023/03/part-5-dotnet7-aspnetcore-identity-series-google-authentication.html
+- https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-7.0

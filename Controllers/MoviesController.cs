@@ -59,6 +59,7 @@ namespace ASP_CORE_MVC.Controllers {
         }
 
         // GET: Movies/Edit/5
+        /*Edit.cshtml*/
         public async Task<IActionResult> Edit(int? id) {
             if (id == null || _context.Movie == null) {
                 return NotFound();
@@ -74,8 +75,9 @@ namespace ASP_CORE_MVC.Controllers {
         // POST: Movies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*Bind attribute. -> protect against over-posting , ViewModel*/
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] /*this attribute previent forgery of a request*/
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie) {
             if (id != movie.Id) {
                 return NotFound();
