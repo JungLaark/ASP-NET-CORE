@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASP_CORE_MVC.Data;
 using ASP_CORE_MVC.Models;
+using System.Diagnostics;
 
 namespace ASP_CORE_MVC.Controllers {
     public class MoviesController : Controller {
@@ -16,11 +17,13 @@ namespace ASP_CORE_MVC.Controllers {
             /*의존성 주입 Database context*/
             _context = context;
         }
+
+
         //https://localhost:7157/Movies/Index?searchString=g
         //https://localhost:7157/Movies/Index/h
         // GET: Movies -> 이것들을 action mathod 라고 지칭하고 있음.
         //[HttpPost] 이거 이렇게 하면 오류남
-        public async Task<IActionResult> Index(string searchString) {
+        public async Task<IActionResult> Index(string MovieGenre, string searchString) {
 
             //return _context.Movie != null ?   
             //            View(await _context.Movie.ToListAsync()) :
@@ -30,6 +33,11 @@ namespace ASP_CORE_MVC.Controllers {
                 return Problem("Entity set 'Context.Movie' is null");
             }
 
+            /*get all genre*/
+            IQueryable<string> genreQuery = from m in _context.Movie
+                                            orderby m.Genre
+                                            select m.Genre;
+
             var movies = from m in _context.Movie
                         select m;
 
@@ -37,7 +45,17 @@ namespace ASP_CORE_MVC.Controllers {
                 movies = movies.Where(s => s.Title!.Contains(searchString));
             }
 
-            return View(await movies.ToListAsync());
+            if (!String.IsNullOrEmpty(MovieGenre)) {
+                movies = movies.Where(x => x.Genre == MovieGenre);
+            }
+
+            var movieGenreVM = new MovieGenreViewModel {
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Movies = await movies.ToListAsync()
+            };
+
+            //return View(await movies.ToListAsync());
+            return View(movieGenreVM);
         }
 
         [HttpPost]
@@ -46,6 +64,7 @@ namespace ASP_CORE_MVC.Controllers {
         }
 
         // GET: Movies/Details/5
+        /*IActionResult 동기일 때는 그냥 반환형으로 하는데 비동기일때는 Task*/
         public async Task<IActionResult> Details(int? id) {
             if (id == null || _context.Movie == null) {
                 return NotFound();
@@ -53,6 +72,7 @@ namespace ASP_CORE_MVC.Controllers {
 
             var movie = await _context.Movie
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (movie == null) {
                 return NotFound();
             }
