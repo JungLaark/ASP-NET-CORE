@@ -16,12 +16,33 @@ namespace ASP_CORE_MVC.Controllers {
             /*의존성 주입 Database context*/
             _context = context;
         }
+        //https://localhost:7157/Movies/Index?searchString=g
+        //https://localhost:7157/Movies/Index/h
+        // GET: Movies -> 이것들을 action mathod 라고 지칭하고 있음.
+        //[HttpPost] 이거 이렇게 하면 오류남
+        public async Task<IActionResult> Index(string searchString) {
 
-        // GET: Movies
-        public async Task<IActionResult> Index() {
-            return _context.Movie != null ?
-                        View(await _context.Movie.ToListAsync()) :
-                        Problem("Entity set 'ASP_CORE_MVCContext.Movie'  is null.");
+            //return _context.Movie != null ?   
+            //            View(await _context.Movie.ToListAsync()) :
+            //            Problem("Entity set 'ASP_CORE_MVCContext.Movie'  is null.");
+
+            if(_context.Movie == null) {
+                return Problem("Entity set 'Context.Movie' is null");
+            }
+
+            var movies = from m in _context.Movie
+                        select m;
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                movies = movies.Where(s => s.Title!.Contains(searchString));
+            }
+
+            return View(await movies.ToListAsync());
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed) {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // GET: Movies/Details/5
